@@ -3,7 +3,7 @@
 # https://github.com/hannalab/Mouse_TFSEM
 # Run on R.4.3.1
 #####################################
-WORKING_DIR = "/home/labs/hanna/noanov/SynEmb2.0/SEURAT/RUN2/" 
+WORKING_DIR = "<enter working dir here>" 
 setwd(WORKING_DIR)
 library(Seurat)
 library(Matrix)
@@ -12,8 +12,8 @@ library(Matrix)
 # Taken from Proks, M., Salehin, N. & Brickman, J.M. Deep learning-based models for preimplantation 
 # mouse and human embryos based on single-cell RNA sequencing. Nat Methods 22, 207–216 (2025).
 #####
-brickman_data <- read.csv("/home/labs/hanna/noanov/AI/Project/BRICKMAN/brickman_expression_matrix.txt",header=T,sep="\t",row.names = 1)
-brickman_meta <- read.csv("/home/labs/hanna/noanov/AI/Project/BRICKMAN/brickman_cell_metadata.csv",header=T)
+brickman_data <- read.csv("brickman_expression_matrix.txt",header=T,sep="\t",row.names = 1)
+brickman_meta <- read.csv("brickman_cell_metadata.csv",header=T)
 brickman <- CreateSeuratObject(counts = brickman_data, project = "ATLAS", min.cells = 3, min.features = 200)
 D_96h.data<-readRDS("D_priming.rds")
 C_48h.data<-readRDS("C_48h.rds")
