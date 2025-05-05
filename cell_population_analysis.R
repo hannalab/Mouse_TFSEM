@@ -1,4 +1,9 @@
-WORKING_DIR = "< Enter a path to your working dir here >" 
+####################################
+# Written by Dr. Noa Novershtern 
+# https://github.com/hannalab/Mouse_TFSEM
+# Run on R.4.3.1
+#####################################
+WORKING_DIR = "<enter your working dir here>" 
 setwd(WORKING_DIR)
 library(cowplot)
 library(dplyr)
