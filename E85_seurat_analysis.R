@@ -5,7 +5,6 @@
 #####################################
 #WORKING_DIR = "<enter your working dir here>" 
 #setwd(WORKING_DIR)
-setwd("~/SynEmb2.0/SEURAT/RUN4/")
 library(Seurat)
 library(Matrix)
 library(ggplot2)
@@ -60,7 +59,7 @@ my_colors_ct = c(cluster0_col,cluster1_col,cluster2_col,cluster3_col,cluster4_co
                  cluster18_col,cluster19_col,cluster20_col,cluster21_col,cluster22_col,cluster23_col,cluster24_col,cluster25_col,cluster26_col,cluster27_col,cluster28_col,cluster29_col,cluster30_col,cluster31_col,cluster32_col,cluster33_col)
 
 ##### Load data after CellRanger #####
-TFSEM_vs_Nat_E85.data <- Read10X(data.dir = "~/SynEmb2.0/CellRangerE85/AGG_SEM_vs_Nat_E85_3/outs/count/filtered_feature_bc_matrix/")
+TFSEM_vs_Nat_E85.data <- Read10X(data.dir = "<path to data>/outs/count/filtered_feature_bc_matrix/")
 TFSEM.data <- CreateSeuratObject(counts = TFSEM_vs_Nat_E85.data, project = "TFSEM", min.cells = 3, min.features = 200)
 
 #####Add sample names and type ######
