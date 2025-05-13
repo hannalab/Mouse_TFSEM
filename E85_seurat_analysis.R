@@ -5,6 +5,7 @@
 #####################################
 #WORKING_DIR = "<enter your working dir here>" 
 #setwd(WORKING_DIR)
+setwd("~/SynEmb2.0/SEURAT/RUN4/")
 library(Seurat)
 library(Matrix)
 library(ggplot2)
@@ -59,39 +60,39 @@ my_colors_ct = c(cluster0_col,cluster1_col,cluster2_col,cluster3_col,cluster4_co
                  cluster18_col,cluster19_col,cluster20_col,cluster21_col,cluster22_col,cluster23_col,cluster24_col,cluster25_col,cluster26_col,cluster27_col,cluster28_col,cluster29_col,cluster30_col,cluster31_col,cluster32_col,cluster33_col)
 
 ##### Load data after CellRanger #####
-TFSEM_vs_Nat_E85.data <- Read10X(data.dir = "<path to data>/outs/count/filtered_feature_bc_matrix/")
-TFSEM.data <- CreateSeuratObject(counts = TFSEM_vs_Nat_E85.data, project = "TFSEM2", min.cells = 3, min.features = 200)
+TFSEM_vs_Nat_E85.data <- Read10X(data.dir = "~/SynEmb2.0/CellRangerE85/AGG_SEM_vs_Nat_E85_3/outs/count/filtered_feature_bc_matrix/")
+TFSEM.data <- CreateSeuratObject(counts = TFSEM_vs_Nat_E85.data, project = "TFSEM", min.cells = 3, min.features = 200)
 
 #####Add sample names and type ######
 groups<-as.numeric(str_extract(colnames(TFSEM.data),"\\d+"))
-ct <- groups
-ct<-ifelse(groups==1,ct[groups]<-"n_TFSEM_E8_5",ct[groups]<-ct)
-ct<-ifelse(groups==2,ct[groups]<-"o_TFSEM_E8_5-1EMB",ct[groups]<-ct)
-ct<-ifelse(groups==3,ct[groups]<-"p_TFSEM_E8_5-5EMB",ct[groups]<-ct)
-ct<-ifelse(groups==4,ct[groups]<-"q_TFSEM_E8_5_V2",ct[groups]<-ct)
-ct<-ifelse(groups==5,ct[groups]<-"a_InUtE85singleembryo1",ct[groups]<-ct)
-ct<-ifelse(groups==6,ct[groups]<-"b_InUtE85singleembryo2",ct[groups]<-ct)
-ct<-ifelse(groups==7,ct[groups]<-"c_InUtE85singleembryo4",ct[groups]<-ct)
-ct<-ifelse(groups==8,ct[groups]<-"d_InUtE85twoembryos",ct[groups]<-ct)
-ct<-ifelse(groups==9,ct[groups]<-"i_Cdx2-0d-2pooled",ct[groups]<-ct)
-ct<-ifelse(groups==10,ct[groups]<-"j_Cdx2-10d-2pooled",ct[groups]<-ct)
-ct<-ifelse(groups==11,ct[groups]<-"k_Cds2-3d-1emb",ct[groups]<-ct)
-ct<-ifelse(groups==12,ct[groups]<-"l_Cds2-3d-2pooled",ct[groups]<-ct)
-ct<-ifelse(groups==13,ct[groups]<-"m_TSCbl-2pooled",ct[groups]<-ct)
-ct<-ifelse(groups==14,ct[groups]<-"g_ExUt_E85_1",ct[groups]<-ct)
-ct<-ifelse(groups==15,ct[groups]<-"h_ExUt_E85_pool",ct[groups]<-ct)
-TFSEM.data$ct<-ct
+sample <- groups
+sample<-ifelse(groups==1,"n_TFSEM_E8_5",sample)
+sample<-ifelse(groups==2,"o_TFSEM_E8_5-1EMB",sample)
+sample<-ifelse(groups==3,"p_TFSEM_E8_5-5EMB",sample)
+sample<-ifelse(groups==4,"q_TFSEM_E8_5_V2",sample)
+sample<-ifelse(groups==5,"a_InUtE85singleembryo1",sample)
+sample<-ifelse(groups==6,"b_InUtE85singleembryo2",sample)
+sample<-ifelse(groups==7,"c_InUtE85singleembryo4",sample)
+sample<-ifelse(groups==8,"d_InUtE85twoembryos",sample)
+sample<-ifelse(groups==9,"i_Cdx2-0d-2pooled",sample)
+sample<-ifelse(groups==10,"j_Cdx2-10d-2pooled",sample)
+sample<-ifelse(groups==11,"k_Cds2-3d-1emb",sample)
+sample<-ifelse(groups==12,"l_Cds2-3d-2pooled",sample)
+sample<-ifelse(groups==13,"m_TSCbl-2pooled",sample)
+sample<-ifelse(groups==14,"g_ExUt_E85_1",sample)
+sample<-ifelse(groups==15,"h_ExUt_E85_pool",sample)
+TFSEM.data$sample<-sample
 
 type <- groups
-type<-ifelse(groups %in% c(1,2,3,4),type[groups]<-"TFSEM",type[groups]<-type)
-type<-ifelse(groups %in% c(5,6,7,8),type[groups]<-"InUt",type[groups]<-type)
-type<-ifelse(groups %in% c(9,10,11,12,13),type[groups]<-"SEM",type[groups]<-type)
-type<-ifelse(groups %in% c(14,15),type[groups]<-"ExUt",type[groups]<-type)
+type<-ifelse(groups %in% c(1,2,3,4),"TFSEM",type)
+type<-ifelse(groups %in% c(5,6,7,8),"InUt",type)
+type<-ifelse(groups %in% c(9,10,11,12,13),"SEM",type)
+type<-ifelse(groups %in% c(14,15),"ExUt",type)
 TFSEM.data$type<-type
 
 ###### QC ###### 
 TFSEM.data[["percent.mt"]] <- PercentageFeatureSet(TFSEM.data, pattern = "^mt-")
-VlnPlot(TFSEM.data, features = c("nFeature_RNA", "nCount_RNA", "percent.mt"), ncol = 3,pt.size = 0,same.y.lims=F,log = T,split.by = "ct",group.by="ct")+theme(legend.position = "none")+xlab("")
+VlnPlot(TFSEM.data, features = c("nFeature_RNA", "nCount_RNA", "percent.mt"), ncol = 3,pt.size = 0,same.y.lims=F,log = T,split.by = "sample",group.by="sample")+theme(legend.position = "none")+xlab("")
 plot1 <- FeatureScatter(TFSEM.data, feature1 = "nCount_RNA", feature2 = "percent.mt")
 plot2 <- FeatureScatter(TFSEM.data, feature1 = "nCount_RNA", feature2 = "nFeature_RNA")
 plot1+plot2
@@ -101,10 +102,10 @@ TFSEM.data_sub <- subset(TFSEM.data, subset = nFeature_RNA > 1000 & nFeature_RNA
 rm(TFSEM.data)
 
 ##### Normalization ######
-new_sub.list <- SplitObject(TFSEM.data_sub, split.by = "ct")
+new_sub.list <- SplitObject(TFSEM.data_sub, split.by = "sample")
 new_sub.list <- lapply(X = new_sub.list, FUN = function(x) {
   x <- NormalizeData(x)
-  x <- FindVariableFeatures(x, selection.method = "vst", nfeatures = 2000)
+  x <- FindVariableFeatures(x, selesampleion.method = "vst", nfeatures = 2000)
 })
 
 ##### Combined UMAP analysis, with anchoring ######
@@ -126,7 +127,7 @@ combined <- FindClusters(combined, resolution = 0.8)
 combined$seurat_clusters = combined$integrated_snn_res.0.8
 DimPlot(combined, reduction = "umap", group.by = "seurat_clusters",label=T,pt.size = 1,cols = my_colors_ct)
 DimPlot(combined, cols=my_colors_ct,reduction = "umap", group.by="seurat_clusters",split.by="type",label=T,pt.size = 1)& NoAxes()
-VlnPlot(combined, features = c("nFeature_RNA"), ncol = 1,pt.size = 0,same.y.lims=F,log = T,group.by="ct")+theme(legend.position = "none",plot.title = element_blank())+xlab("")
+VlnPlot(combined, features = c("nFeature_RNA"), ncol = 1,pt.size = 0,same.y.lims=F,log = T,group.by="sample")+theme(legend.position = "none",plot.title = element_blank())+xlab("")
 FeaturePlot(combined,"nCount_RNA")
 FeaturePlot(combined,"nFeature_RNA")
 
@@ -158,7 +159,6 @@ dotblot_features = c(endoderm_dotblot,exend_dotblot,hindgut_dotblot,midgut_dotbl
                      blood_dotblot,hpc_dotblot,endo_dotblot,tailbud_dotblot,brain_dotblot,neural_dotblot,
                      cardiac_dotblot,placodes_dotblot,exem_dotbplot,meso_dotblot,allantois_dotblot,somites_dotblot)
 
-dotblot_features
 DotPlot(combined,features = dotblot_features,group.by = c("order"),cluster.idents = F,assay = "RNA",scale =T,scale.min =0.5) + 
   scale_y_discrete(expand = expansion(mult = c(0.04, 0.04))) + 
   theme(axis.text.x = element_text(angle = 90, hjust = 1,size =8))
@@ -233,3 +233,20 @@ table(TFSEM.data_sub$Chorion,TFSEM.data_sub$type)
 TGC_markers = c("Prl2c2","Prl3d1","Prl4a1","Cdh5")
 chorion_clusters <- subset(combined, subset = (seurat_clusters==9|seurat_clusters==10))
 FeaturePlot(chorion_clusters, features = TGC_markers,min.cutoff = 0,split.by = "type",order=T,combine = T) & NoAxes() & NoLegend()
+
+###### PGC analysis #########
+PGC = c("Pou5f1","Nanog","Klf4","Sox2","Dppa3","Prdm1","Bmp4","Prdm14","Alpl","Nanos3")
+cluster21 = subset(combined, subset = (seurat_clusters==21))
+cluster21$PGC_mean <- rowMeans(FetchData(cluster21, vars = PGC))
+FeaturePlot(cluster21,features="PGC_mean",min.cutoff = 0,order=T,cols=c("grey","red","brown3","brown"))#& NoLegend() & NoAxes() #
+
+
+###### DimPlot TFSEM vs InUtero / vs SEM #########
+combined$fig = "NO"
+combined$fig[combined$type %in% c("TFSEM","InUt")] = "YES"
+DimPlot(combined, reduction = "umap", group.by="type",split.by="fig",label=F,raster=T,order="InUt",label.size = 2,cols=c("grey","black","pink","brown2"))& NoAxes() 
+
+combined$fig = "NO"
+combined$fig[combined$type %in% c("TFSEM","SEM")] = "YES"
+DimPlot(combined, reduction = "umap", group.by="type",split.by="fig",label=F,raster=T,order="InUt",label.size = 2,cols=c("black","brown2","grey","pink"))& NoAxes() 
+
