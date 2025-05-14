@@ -5,7 +5,6 @@
 #####################################
 #WORKING_DIR = "<enter your working dir here>" 
 #setwd(WORKING_DIR)
-# Run on R.4.3.1
 library(dplyr)
 library(patchwork)
 library(Seurat)
