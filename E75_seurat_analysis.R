@@ -41,18 +41,18 @@ my_colors_ct = c(cluster0_col,cluster1_col,cluster2_col,cluster3_col,cluster4_co
 
 ##### Load data after CellRanger #####
 TFSEM_vs_Nat_E75.data <- Read10X(data.dir = "<path to data>/outs/count/filtered_feature_bc_matrix/")
-TFSEM.data <- CreateSeuratObject(counts = SEM_vs_Nat_E75.data, project = "SEM2", min.cells = 3, min.features = 200)
+TFSEM.data <- CreateSeuratObject(counts = TFSEM_vs_Nat_E75.data, project = "SEM2", min.cells = 3, min.features = 200)
 
 #####Add sample names ######
 TFSEM.data$sample<-as.numeric(str_extract(colnames(TFSEM.data),"\\d+"))
 type<- TFSEM.data$sample
-type<-ifelse(groups==1,type[groups]<-"Head_fold",type[groups]<-type)
-type<-ifelse(groups==2,type[groups]<-"Late_streak",type[groups]<-type)
-type<-ifelse(groups==3,type[groups]<-"Nat_E75",type[groups]<-type)
-type<-ifelse(groups==4,type[groups]<-"TFSEM_E75",type[groups]<-type)
+type<-ifelse(type==1,"Head_fold",type)
+type<-ifelse(type==2,"Late_streak",type)
+type<-ifelse(type==3,"Nat_E75",type)
+type<-ifelse(type==4,"TFSEM_E75",type)
 TFSEM.data$sample<-type
-
 ###### QC ###### 
+
 TFSEM.data[["percent.mt"]] <- PercentageFeatureSet(TFSEM.data, pattern = "^mt-")
 VlnPlot(TFSEM.data, features = c("nFeature_RNA", "nCount_RNA", "percent.mt"), ncol = 3,pt.size = 0,same.y.lims=F,log = T,split.by = "sample",group.by="sample")+theme(legend.position = "none")+xlab("")
 plot1 <- FeatureScatter(TFSEM.data, feature1 = "nCount_RNA", feature2 = "percent.mt")
@@ -84,13 +84,13 @@ combined <- FindClusters(combined, resolution = 0.5)
 ###### Visualization #####
 # To upload the exact seurat object used in the paper: 
 # combined <- readRDS("combined_SEM_Nat_E75.rds")
-###########################
 
 DimPlot(combined, reduction = "umap", group.by="seurat_clusters",split.by="sample",label=T,pt.size = 1,cols = my_colors_ct) & NoAxes() 
 VlnPlot(combined, features = c("nCount_RNA"), ncol = 1,pt.size = 0,same.y.lims=F,log = T,group.by="seurat_clusters")+theme(legend.position = "none",plot.title = element_blank())+xlab("")
 FeaturePlot(combined,"nCount_RNA")
 FeaturePlot(combined,"nFeature_RNA")
 
+##### Find markers ######
 TFSEM_7_5_markers = FindAllMarkers(combined,logfc.threshold = 0.5,only.pos =T )
 write.csv(TFSEM_7_5_markers,"TFSEM7.5_markers.csv")
 
@@ -161,4 +161,4 @@ combined$order[combined$seurat_clusters %in% c("9","15")] <-
 DotPlot(combined,features = dotblot_features,group.by = c("order"),cluster.idents = F,assay = "RNA",scale =T,scale.min =0) + scale_y_discrete(expand = expansion(mult = c(0.04, 0.04))) + 
   theme(axis.text.x = element_text(angle = 90, hjust = 1,size =8))
 
-
+#saveRDS(combined,"combined_SEM_Nat_E75.rds")
