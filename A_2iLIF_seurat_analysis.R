@@ -2,7 +2,7 @@
 # Written by Noa Novershtern 
 # 
 #### Run on R.4.3.1 ################
-#WORKING_DIR = "<enter your working dir here" 
+#WORKING_DIR = "<enter your working dir here>" 
 #setwd(WORKING_DIR)
 library(cowplot)
 library(dplyr)
@@ -22,7 +22,7 @@ pre_color = "#CC6666"
 twoc_color = "#9933CC"
 
 ##### Load data after CellRanger #####
-A_2i_LIF.input <- Read10X(data.dir = "/home/labs/hanna/noanov/SynEmb2.0/CellRanger/2i_LIF/outs/filtered_feature_bc_matrix/")
+A_2i_LIF.input <- Read10X(data.dir = "<path to data>/outs/filtered_feature_bc_matrix/")
 # Initialize the Seurat object with the raw (non-normalized data).
 A_2i_LIF.data <- CreateSeuratObject(counts = A_2i_LIF.input, project = "TFSEM", min.cells = 3, min.features = 200)
  
