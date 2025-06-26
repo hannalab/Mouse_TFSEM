@@ -1,0 +1,11 @@
+{
+"WORKING_DIR" : "<path to working dir>",
+"OUTPUT_DIR" : "<path to working dir>/output_SEM85_TEST/",
+"MODEL_FILE" : "<path to working dir>/out_3L_35_128/lvea_model",
+"ADATA_FILE" : "<path to working dir>/out_3L_35_128/lvea_model/adata.h5ad",
+"TEST_FILE" : "<path to data>/SEM85_2025.h5ad",
+"CHECK_VAL_EVERY_EPOCH" : "5",
+"TEST_PREDICTIONS" : "0",
+"QUERY_ANNOTATIONS" : "seurat_clusters",
+"EPOCHS_TEST": "100"
+}

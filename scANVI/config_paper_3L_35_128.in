@@ -1,0 +1,16 @@
+{
+"WORKING_DIR" : "<path to working dir>",
+"OUTPUT_DIR" : "<path to working dir>/out_3L_35_128/",
+"TRAIN_FILE" : "<path to data>/mouse_atlas_gottgens_stelzer.h5ad",
+"SCANVI_LABELS_KEY" : "labels_scanvi",
+"BATCH_CATEGORY" : "dataset",
+"N_HIDDEN": "128",
+"N_LAYERS": "3",
+"N_LATENT": "35",
+"EPOCHS_TRAIN": "100",
+"EPOCHS_TEST": "100",
+"CHECK_VAL_EVERY_EPOCH" : "5",
+"LR" : "1e-3"
+}
+
+
