@@ -40,6 +40,7 @@ The Python code environment is described in [`scvi_env.yml`](scANVI/scvi_env.yml
 ## 🧠 scANVI (Python)
 
 Located in the `scANVI/` folder:
+```
 scANVI/
 ├── scvi_env.yml # Conda environment file
 ├── config_paper_3L_35_128.in # Configuration for training
@@ -47,7 +48,7 @@ scANVI/
 ├── learn_with_scVI.py # scVI/scANVI training script
 ├── test_query_with_model.py # Transfer learning on query data
 └── utils.py # Utility functions
-
+```
 ---
 
 ## 📌 Notes
