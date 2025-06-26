@@ -36,6 +36,7 @@ The Python code environment is described in [`scvi_env.yml`](scANVI/scvi_env.yml
   Pseudotime analysis of the 48h (Day 2) sample using Monocle3.
 
 ---
+rds files can be found in ncbi GEO https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE294766
 
 ## 🧠 scANVI (Python)
 
