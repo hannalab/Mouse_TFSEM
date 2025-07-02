@@ -53,8 +53,9 @@ scANVI/
 └── utils.py # Utility functions
 ```
 ### Data Availability
-Train data can be downloaded from zenodo: 
-https://zenodo.org/records/15789211?token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6IjE1N2YxYmQ2LTViZDctNDllMy1hMmEzLWM1NTM4OGMyNjIxYyIsImRhdGEiOnt9LCJyYW5kb20iOiIyNGM2OTgwMTBmNmUwYzBkZDY0ZmRmNDUyNGJiZDUxZSJ9.daS_o360CcS3vguS06Ck2TZl1QfqBa-svmtxlV5nXSlso_R5zE57J4wjwYJBt8vyZl4uIHsRazliz51dBYzGQg
+
+Train data can be downloaded from zenodo: https://zenodo.org/badge/DOI/10.5281/zenodo.15789211.svg
+
 ---
 
 ## 📌 Notes
