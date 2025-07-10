@@ -37,7 +37,7 @@ The Python code environment is described in [`scvi_env.yml`](scANVI/scvi_env.yml
 
 ### Data Availability
 -`Sample_list.xlsx` - List of samples used for the analysis
-rds files can be found in ncbi GEO:  https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE294766
+- rds files can be found in ncbi GEO:  https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE294766
 
 ---
 
