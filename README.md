@@ -16,7 +16,8 @@ The Python code environment is described in [`scvi_env.yml`](scANVI/scvi_env.yml
 - `A_2iLIF_seurat_analysis.R` — 2iLIF cell culture sample  
 - `B_24h_seurat_analysis.R` — Day 1 (24h) cell culture sample  
 - `C_48h_seurat_analysis.R` — Day 2 (48h) cell culture sample  
-- `D_96h_seurat_analysis.R` — Day 4 (96h) cell culture sample  
+- `D_96h_seurat_analysis.R` — Day 4 (96h) cell culture sample
+- `AC_seurat_analysis.R` — AC (Alternative conditions) cell culture sample  
 - `E75_seurat_analysis.R` — E7.5 samples  
 - `E85_seurat_analysis.R` — E8.5 samples  
 
